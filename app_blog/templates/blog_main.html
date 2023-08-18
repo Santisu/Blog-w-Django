@@ -1,0 +1,180 @@
+{% extends 'base.html' %} {% load static %}
+{% block content %}
+<div class="row margin-top">
+    <div class="finder col-12">
+        <form method="get" action="{% url 'blog' %}" class="bg-secondary bg-gradient p-3 col-3 rounded-3 mt-3 ms-5 d-flex">
+            <input type="text" name="q" placeholder="Buscar..."  class="my-auto form-control">
+            <button type="submit" class="btn btn-light my-auto ms-4">Buscar</button>
+        </form>
+    </div>
+    <div class="blog-main col-12 col-lg-8">
+
+        {% if search %}
+            {% if tag %}
+        
+        <section class="entries row">
+            <h1 class="col-12 mx-5">Resultados de la búsqueda por tag: <b>{{ tag|capfirst }}</b></h1>
+            {% for post in posts %}
+            <div class="blog-entry col-lg-6">
+                <div class="entry-image ">
+                    <a href="{% url 'post_detail' post.slug %}">
+                        <img src="{{ post.main_picture.url }}" alt="{{ post.title }}">
+                    </a>
+                </div>
+                <div class="blog-entry-content">
+                    <div class="entry-head principal-title mx-2">
+                        <h2 class="entry-title">
+                            <a href="{% url 'post_detail' post.slug %}">
+                                {{ post.title|safe }}
+                            </a>
+                        </h2>
+                        <div class="entry-title-foot">
+                            <div class="entry-time">&#128339; Tiempo de lectura: <b>{{ post.estimated_time }} minutos</b></div>
+                            <div class="entry-tags my-3">
+                                {% for tag in post.tags.all %}
+                                <a href="{% url 'tag_search' tag.tag %}"><span>{{ tag.tag }}</span></a>
+                                {% endfor %}
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="entry-sumary">
+                        {{ post.title_drop|safe|truncatechars:150 }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+            {% endif %}
+            {% if category_search %}
+            <section class="entries row">
+                <h1 class="col-12 mx-5">Resultados de la búsqueda por categoría: <b>{{ category|capfirst }}</b></h1>
+                {% for post in posts %}
+                <div class="blog-entry col-lg-6">
+                    <div class="entry-image ">
+                        <a href="{% url 'post_detail' post.slug %}">
+                            <img src="{{ post.main_picture.url }}" alt="{{ post.title }}">
+                        </a>
+                    </div>
+                    <div class="blog-entry-content">
+                        <div class="entry-head principal-title mx-2">
+                            <h2 class="entry-title">
+                                <a href="{% url 'post_detail' post.slug %}">
+                                    {{ post.title|safe }}
+                                </a>
+                            </h2>
+                            <div class="entry-title-foot">
+                                <div class="entry-time">&#128339; Tiempo de lectura: <b>{{ post.estimated_time }} minutos</b></div>
+                                <div class="entry-tags my-3">
+                                    {% for tag in post.tags.all %}
+                                    <a href="{% url 'tag_search' tag.tag %}"><span>{{ tag.tag }}</span></a>
+                                    {% endfor %}
+                                </div>                            
+                            </div>
+                        </div>
+                        <div class="entry-sumary">
+                            {{ post.title_drop|safe|truncatechars:150 }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+            {% endif %}
+        {% else %}
+
+        {% if main_post %}
+        <section class="main-entry">
+            <div class="blog-entry">
+                <div class="entry-image ">
+                    <a href="{% url 'post_detail' main_post.slug %}">
+                        <img src="{{ main_post.main_picture.url }}" alt="{{ main_post.title }}">
+                    </a>
+                </div>
+                <div class="blog-entry-content">
+                    <div class="entry-head principal-title mx-4">
+                        <h2 class="entry-title">
+                            <a href="{% url 'post_detail' main_post.slug %}">
+                            {{ main_post.title|safe }}
+                            </a>
+                        </h2>
+                        <div class="entry-title-foot">
+                            <div class="entry-time">&#128339; Tiempo de lectura: <b>{{ main_post.estimated_time }} minutos</b></div>
+                            <div class="entry-tags my-2">
+                                {% for tag in main_post.tags.all %}
+                                <a href="{% url 'tag_search' tag.tag %}"><span>{{ tag.tag }}</span></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="entry-sumary">
+                        {{ main_post.title_drop|safe }}
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+        </section>
+        {% endif %}
+        <section class="entries row">
+            {% for post in posts %}
+            <div class="blog-entry col-lg-6">
+                <div class="entry-image ">
+                    <a href="{% url 'post_detail' post.slug %}">
+                        <img src="{{ post.main_picture.url }}" alt="{{ post.title }}">
+                    </a>
+                </div>
+                <div class="blog-entry-content">
+                    <div class="entry-head principal-title mx-2">
+                        <h2 class="entry-title">
+                            <a href="{% url 'post_detail' post.slug %}">
+                                {{ post.title|safe }}
+                            </a>
+                        </h2>
+                        <div class="entry-title-foot">
+                            <div class="entry-time">&#128339; Tiempo de lectura: <b>{{ post.estimated_time }} minutos</b></div>
+                            <div class="entry-tags my-3">
+                                {% for tag in post.tags.all %}
+                                <a href="{% url 'tag_search' tag.tag %}"><span>{{ tag.tag }}</span></a>
+                                {% endfor %}
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="entry-sumary">
+                        {{ post.title_drop|safe|truncatechars:150 }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+    </div>
+    <div class="blog-side col-12 col-lg-3">
+        <div class="side-content row">
+            <div class="side-image col-12  mx-auto">
+                <img class="image img-fluid self-foto" src="{% if main.photo %} {{ main.photo.url }} {% endif %}"
+                    alt="Usuario" />
+            </div>
+            <div class="blog-side-item">
+                <h3>Sobre mí</h3>
+                <p>Description about the blogger, better if it is set through a var</p>
+            </div>
+            <div class="blog-side-item">
+                <h3>Categorias</h3>
+                <div class="blog-categorias">
+                    {% for category in categories %}
+                    <a href="{% url 'category_search' category.id %}"><h4>{{ category|capfirst }}</h4></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="blog-side-item">
+                <h3>Tags</h3>
+                <div class="blog-tags">
+                    {% for tag in tags %}
+                        <a href="{% url 'tag_search' tag.tag %}"><span>{{ tag.tag }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

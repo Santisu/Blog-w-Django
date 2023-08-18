@@ -1,0 +1,454 @@
+body {
+    background-color: #8aa7dd;
+}
+
+
+/* BLOG MAIN */
+a {
+    text-decoration:none;
+}
+
+.blog-main {
+    max-width: 100%;
+    height: auto;
+    color: white;
+}
+
+.main-entry {
+    padding: 5% 0;
+}
+
+.main-entry .blog-entry {
+    padding: 0;
+}
+
+.blog-entry {
+    padding: 15px;
+    text-align: justify;
+    justify-content: center;
+    position: relative;
+    height: fit-content;
+}
+
+.entry-image {
+    margin: 0 auto;
+    position: relative;
+    width: 90%;
+    max-width: 90;
+    height: auto;
+    max-height: 60%;
+    overflow: hidden;
+    justify-content: center;
+    border-radius: 10px;
+
+}
+
+.entry-image img {
+    margin: auto;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: 0.3s;
+    transform: scale(1.1);
+    object-fit: cover;
+}
+
+.entry-image img:hover {
+    transform: scale(1);
+}
+
+.blog-entry-content {
+    top: 0;
+    left: 10%;
+    right: 10%;
+    position: relative;
+    text-decoration: none;
+    padding: 1px 15px 40px;
+    max-width: 80%;
+    max-height: 55%;
+    background-color: rgb(31, 71, 107);
+    -webkit-box-shadow: 1px -1px 10px 0px rgba(0, 0, 0, 0.69);
+    -moz-box-shadow: 1px -1px 10px 0px rgba(0, 0, 0, 0.69);
+    box-shadow: 1px -1px 10px 0px rgba(0, 0, 0, 0.69);
+    transform: translateY(-10%);
+}
+
+.entry-sumary {
+    padding: 10px
+}
+
+.entry-head {
+    display: block;
+    padding-top: 30px;
+    justify-content: space-between;
+}
+
+
+.entry-title {
+    padding-bottom: 10px;
+    margin: 0 10px 0 0;
+    text-decoration: none;
+    color: rgb(21, 29, 143);
+    text-shadow: 2px 2px 4px rgba(255, 254, 254, 0.651);
+    font-weight: bold;
+}
+
+.principal-title .entry-title {
+    padding-bottom: 10px;
+    margin: 0 10px 0 0;
+    text-decoration: none;
+    color: rgb(21, 29, 143);
+    text-shadow: 1px 1px 1px rgba(255, 254, 254, 0.24);
+    font-weight: bold;
+}
+
+.entry-title a {
+    text-decoration: none;
+    color: rgb(21, 29, 143);
+    font-weight: bold;
+}
+
+.entry-title a:hover {
+    color: rgb(0, 22, 216);
+}
+
+.entry-time {
+    margin-right: 1rem
+}
+
+.entry-tags a span {
+    margin-top: 3px;
+    margin: 3px;
+    text-justify: center;
+    background-color: gray;
+    padding: 3px 6px;
+    border-radius: 5px;
+    color: white;
+}
+
+.blog-tags a span {
+    margin-top: 3px;
+    margin: 3px;
+    text-justify: center;
+    background-color: gray;
+    padding: 3px 6px;
+    border-radius: 5px;
+    color: white;
+}
+
+.blog-entry hr {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    bottom: 0;
+}
+
+.entry-date {
+    display: none;
+}
+
+.blog-side {
+    padding: 10% 10%;
+}
+
+.blog-side-item h3 {
+    width: 100%;
+    margin: 0;
+    padding: 5% 0;
+    text-align: center;
+}
+
+.blog-side-item h3:after {
+    display: inline-block;
+    margin: 0 0 8px 5%;
+    height: 3px;
+    content: " ";
+    background-color: #999;
+    width: 20%;
+}
+
+.blog-side-item h3:before {
+    display: inline-block;
+    margin: 0 5% 8px 0;
+    height: 3px;
+    content: " ";
+    background-color: #999;
+    width: 20%;
+}
+
+.side-image {
+    width: 70%;
+}
+
+.blog-categorias {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-categorias a {
+    width: 100%;
+    margin: 2px;
+    padding: 5px;
+    background-color: rgba(35, 111, 192, 0.95);
+    color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blog-categorias a:hover {
+    background-color: #2268b3;
+    color: rgba(0, 0, 0, 1);
+}
+
+/* BLOG POST ####################################################################################### */
+.post-header {
+    position: relative;
+}
+
+.post-header .entry-head {
+    padding-top: 10px;
+}
+
+.post-header-content {
+    position: absolute;
+    top: 6%;
+    left: calc(6% + 3vw);
+    color: white;
+}
+
+.post-image {
+    width: 100%;
+    height: 120vh;
+}
+
+.post-image img {
+    position: absolute;
+    width: 99%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.post-time {
+    text-indent: 0.2em;
+}
+
+.post-day::after {
+    content: ","
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    overflow: hidden
+}
+
+.post-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover
+}
+
+.post-body {
+    position: relative;
+    padding: 60px 30px;
+    text-align: justify;
+}
+
+.post-footer .footer-content {
+    display: table;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    padding: 5px 0;
+    clear: both;
+    border-top: 1px solid #080404;
+    border-bottom: 1px solid #080404;
+}
+
+.like-button {
+    border: 2px solid red;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.liked-button {
+    border: 2px solid red;
+    border-radius: 5px;
+    background: white;
+    cursor: default;
+}
+
+.related-entry {
+    position: relative;
+
+}
+
+.related-entry .blog-entry-content {
+    background-color: transparent;
+    box-shadow: none;
+    position: absolute;
+    top: 40px;
+    color: white;
+}
+
+.related-entry .entry-image {
+    height: 70vh;
+    opacity: 0.8;
+}
+
+.share-icon {
+    width: 45px;
+}
+
+.share-icon-2 {
+    width: 50px;
+}
+
+.share-icon-3 {
+    width: 35px;
+}
+
+@media only screen and (min-width: 995px) {
+    .blog-side {
+        padding: 1% 1%;
+        margin: 1% auto;
+    }
+
+    .blog-main {
+        padding: 10px 0;
+    }
+
+    .blog-entry {
+        position: relative;
+        padding: 0 5%
+    }
+
+    .entry-title-foot {
+        font-size: 14px;
+        display: flex;
+
+    }
+
+    .entry-head .entry-title-foot {
+        font-size: 14px;
+        display: block;
+
+    }
+
+    .entry-image {
+        margin: auto;
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+        
+    }
+
+    .main-entry .blog-entry .entry-image {
+        margin: auto;
+        width: 90%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .main-entry .entry-image {
+
+        max-width: 65%;
+
+    }
+
+    .entry-date {
+        display: block;
+        left: 60px;
+        top: 50px;
+        position: absolute;
+        text-decoration: none;
+    }
+
+    .entry-date .month {
+        font-size: 14px;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+
+    .entry-date .day {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .entry-date a,
+    .entry-date span {
+        display: block;
+        text-align: center;
+        color: #b8927c;
+        line-height: 1;
+    }
+
+    .entry-sumary {
+        margin: 15px 20px 0 0;
+    }
+
+    .entries .blog-entry .blog-entry-content .entry-head .entry-title {
+        font-size: 25px;
+
+    }
+
+    .main-entry .blog-entry .blog-entry-content {
+        top: 0;
+        left: 10%;
+        right: 10%;
+        position: relative;
+        text-decoration: none;
+        padding: 1px 15px 40px;
+        max-width: 80%;
+        max-height: 55%;
+        background-color: rgb(31, 71, 107);
+        -webkit-box-shadow: 1px -1px 10px 0px rgba(0, 0, 0, 0.69);
+        -moz-box-shadow: 1px -1px 10px 0px rgba(0, 0, 0, 0.69);
+        box-shadow: 1px -1px 10px 0px rgba(0, 0, 0, 0.69);
+        transform: translateY(-10%);
+    }
+
+    /* BLOG POST ########################################################### */
+    .post-header {
+        position: relative;
+    }
+
+    .post-header .entry-head {
+        padding-top: 10px;
+
+
+    }
+
+    .post-header-content {
+        position: absolute;
+        top: 6%;
+        left: calc(6% + 3vw);
+        color: white;
+    }
+
+    .post-image {
+        width: 100%;
+        height: 80vh;
+    }
+
+    .post-image img {
+        position: absolute;
+        width: 99%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.7;
+    }
+
+    .post-body {
+        padding: 60px 50px;
+    }
+}
