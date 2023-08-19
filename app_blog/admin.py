@@ -14,8 +14,8 @@ class TagInline(admin.TabularInline):
     extra = 1
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created_at', 'status', 'likes')
-    list_filter = ('status', 'created_at', 'author', 'categories', 'tags')
+    list_display = ('title', 'author', 'created_at', 'is_visible', 'likes')
+    list_filter = ('is_visible', 'created_at', 'author', 'categories', 'tags')
     search_fields = ('title', 'content')
     readonly_fields = ('slug', 'visits', 'likes', 'estimated_time')
     exclude = ('tags',)

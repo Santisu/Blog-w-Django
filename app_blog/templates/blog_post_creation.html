@@ -1,0 +1,175 @@
+{% extends 'base.html' %} {% load static %} {% load blog_filters %}
+{% block content %}
+<div class="container">
+    {% if errors %}
+
+    <div class="col-8 mx-auto my-2 p-4 rounded-2 bg-warning">
+        <h2>Error:</h2>
+        {{ errors }}
+
+    </div>
+    {% endif %}
+    <div class="row margin-top">
+        <div class="col-8 mx-auto my-2 p-4 rounded-2 bg-light">
+            <h2>Categorias</h2>
+            <h6>Selecciona para eliminar:</h6>
+            <div class="d-flex">
+                {% for category in categories %}
+                    <div class="">
+                        <form method="post" action="{% url 'post_creation' %}" id="category-delete-{{ category.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="submit_action" value="delete_category">
+                            <input type="hidden" name="category_id" value="{{ category.id }}">
+                            <button type="button" class="btn btn-light h6 mx-1 p-1 rounded-2 border-dark" onclick="showConfirmationModal('{{ category|capfirst }}', {{ category.id }}, 'category')">{{ category|capfirst }}</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="POST" action="" class="mx-auto d-flex">
+                {% csrf_token %}
+                {{ category_form.as_p}}
+                <button type="submit" name="submit_action" value="category_submit" class="btn btn-light my-auto ms-4 border-dark">Crear Categoría</button>
+            </form>
+        </div>
+        <div class="col-8 mx-auto my-2 p-4 rounded-2 bg-light">
+            <h2>Tags</h2>
+            <h6>Selecciona para eliminar:</h6>
+            <div class="d-flex">
+                {% for tag in tags %}
+                    <div class="">
+                        <form method="post" action="{% url 'post_creation' %}" id="tag-delete-{{ tag.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="submit_action" value="delete_tag">
+                            <input type="hidden" name="tag_id" value="{{ tag.id }}">
+                            <button type="button" class="btn btn-light h6 mx-1 p-1 rounded-2 border-dark" onclick="showConfirmationModal('{{ tag|capfirst }}', {{ tag.id }}, 'tag')">{{ tag|capfirst }}</button>
+                        </form>
+                    </div>
+                {% endfor %}
+                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirmación de Eliminación</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p>¿Desea eliminar <span id="itemToDelete"></span>?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" onclick="submitDeleteForm()">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <form method="POST" action="" class="mx-auto d-flex">
+                {% csrf_token %}
+                {{ tag_form.as_p}}
+                <button type="submit" name="submit_action" value="tag_submit" class="btn btn-light my-auto ms-4 border-dark">Crear Tag</button>
+            </form>
+        </div>
+        <div class="col-8 mx-auto my-2 p-4 rounded-2 bg-light">
+            <h2>Nuevo Post</h2>
+            <form method="POST" action="" class="mx-auto" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ post_form.media}}
+                <div class="my-2">
+                    {{ post_form.title.errors }}
+                    {{ post_form.title.label_tag }}
+                    {{ post_form.title }}
+                </div>
+                <div class="my-2">
+                    {{ post_form.title_drop.errors }}
+                    {{ post_form.title_drop.label_tag }}
+                    {{ post_form.title_drop }}
+                </div>
+                <div class="my-2">
+                    {{ post_form.content.errors }}
+                    {{ post_form.content.label_tag }}
+                    {{ post_form.content }}
+                </div>
+                <div class="my-2">
+                    {{ post_form.main_picture.errors }}
+                    {{ post_form.main_picture.label_tag }}
+                    {{ post_form.main_picture }}
+                </div>
+                <div class="my-2">
+                    {{ post_form.categories.errors }}
+                    {{ post_form.categories.label_tag }}
+                    {{ post_form.categories }}
+                    <div id="selected-categories-list" class="selected-categories-list my-3"></div>
+                </div>
+                <div class="my-2">
+                    {{ post_form.tags.errors }}
+                    {{ post_form.tags.label_tag }}
+                    {{ post_form.tags }}
+                    <div id="selected-tags-list" class="selected-tags-list my-3"></div>
+                </div>
+                <div class="my-2">
+                    {{ post_form.is_visible.errors }}
+                    {{ post_form.is_visible.label_tag }}
+                    {{ post_form.is_visible }}
+                </div>
+                <hr>
+                <div class="text-end">
+                    <button type="submit" name="submit_action" value="post_submit" class="btn btn-light my-auto border-dark">Crear Post</button>
+                </div>   
+            </form>
+        </div>
+    </div>
+</div>
+{% block javascript %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectedTagsList = document.getElementById('selected-tags-list');
+        const tagsSelect = document.getElementById('id_tags');
+
+        function updateSelectedList(selectElement, listElement) {
+            listElement.innerHTML = '';
+            
+            const selectedOptions = Array.from(selectElement.selectedOptions);
+            selectedOptions.forEach(function(option) {
+                const optionText = option.textContent;
+                const span = document.createElement('span');
+                span.textContent = optionText;
+                span.classList.add('border', 'rounded-2', 'border-dark', 'p-1', 'mx-1', 'my-1');
+                listElement.appendChild(span);
+            });
+        }
+
+        tagsSelect.addEventListener('change', function() {
+            updateSelectedList(tagsSelect, selectedTagsList);
+        });
+    });
+
+    function showConfirmationModal(itemName, itemId, itemType) {
+        const modal = document.getElementById('confirmModal');
+        const itemToDeleteElement = modal.querySelector('#itemToDelete');
+        itemToDeleteElement.textContent = itemName;
+        modal.setAttribute('data-item-id', itemId);
+        modal.setAttribute('data-item-type', itemType);
+        modal.classList.add('show');
+        modal.style.display = 'block';
+    }
+    
+    function submitDeleteForm() {
+        const itemId = document.getElementById('confirmModal').getAttribute('data-item-id');
+        const itemType = document.getElementById('confirmModal').getAttribute('data-item-type');
+        const form = document.getElementById(`${itemType}-delete-${itemId}`);
+        form.submit();
+    }
+    
+    const closeModalButtons = document.querySelectorAll('[data-dismiss="modal"]');
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const modal = document.getElementById('confirmModal');
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+        });
+    });
+    
+</script>
+{% endblock %}
+
+
+{% endblock content %}

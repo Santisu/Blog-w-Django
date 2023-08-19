@@ -2,6 +2,10 @@ body {
     background-color: #8aa7dd;
 }
 
+.margin-zero {
+    margin: 0px;
+
+}
 
 /* BLOG MAIN */
 a {
@@ -113,7 +117,11 @@ a {
 }
 
 .entry-time {
-    margin-right: 1rem
+    margin: 5px 0;
+    margin-right: 1rem;
+    background-color: rgba(154, 154, 155, 0.39);
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .entry-tags a span {
@@ -141,10 +149,6 @@ a {
     height: 2px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     bottom: 0;
-}
-
-.entry-date {
-    display: none;
 }
 
 .blog-side {
@@ -207,6 +211,7 @@ a {
 /* BLOG POST ####################################################################################### */
 .post-header {
     position: relative;
+    padding: 0;
 }
 
 .post-header .entry-head {
@@ -219,15 +224,22 @@ a {
     left: calc(6% + 3vw);
     color: white;
 }
+.entry-subtitle {
+    text-shadow: 1px 1px 7px rgb(0, 0, 0);
+}
+
+.post-user {
+    text-shadow: 1px 1px 7px rgb(0, 0, 0);
+}
 
 .post-image {
-    width: 100%;
+    width: 100vw;
     height: 120vh;
 }
 
 .post-image img {
     position: absolute;
-    width: 99%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
     z-index: -1;
@@ -236,6 +248,10 @@ a {
 
 .post-time {
     text-indent: 0.2em;
+}
+
+.post-date {
+    background-color: rgba(154, 154, 155, 0.39);
 }
 
 .post-day::after {
@@ -299,9 +315,17 @@ a {
     color: white;
 }
 
+.related-entry .blog-entry-content .entry-head {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    text-align: justify;
+
+}
+
 .related-entry .entry-image {
     height: 70vh;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .share-icon {
@@ -364,33 +388,6 @@ a {
 
     }
 
-    .entry-date {
-        display: block;
-        left: 60px;
-        top: 50px;
-        position: absolute;
-        text-decoration: none;
-    }
-
-    .entry-date .month {
-        font-size: 14px;
-        font-weight: normal;
-        text-transform: uppercase;
-    }
-
-    .entry-date .day {
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .entry-date a,
-    .entry-date span {
-        display: block;
-        text-align: center;
-        color: #b8927c;
-        line-height: 1;
-    }
-
     .entry-sumary {
         margin: 15px 20px 0 0;
     }
@@ -441,12 +438,13 @@ a {
 
     .post-image img {
         position: absolute;
-        width: 99%;
+        width: 100%;
         height: 100%;
         object-fit: cover;
         z-index: -1;
         opacity: 0.7;
     }
+
 
     .post-body {
         padding: 60px 50px;

@@ -8,6 +8,7 @@ from ckeditor.fields import RichTextField
 from PIL import Image
 import uuid
 import os
+import math
 
 
 def avatar_file_path(instance, filename):
@@ -72,11 +73,6 @@ class Tag(models.Model):
         super(Tag, self).save(*args, **kwargs)
 
 
-STATUS = (
-    (0,"Draft"),
-    (1,"Publish")
-    )
-
 class Post(models.Model):
 
     """Post model"""
@@ -95,8 +91,8 @@ class Post(models.Model):
     main_picture = models.ImageField(upload_to=picture_file_path)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS, default=0)
-    categories = models.ManyToManyField(Category)
+    is_visible = models.BooleanField(default=0)
+    categories = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = models.ManyToManyField(Tag)
     likes = models.PositiveIntegerField(default=0)
     visits = models.PositiveBigIntegerField(default=0, null=True, blank=True)
@@ -104,6 +100,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+    def get_is_visible_display(self):
+        return 'Publish' if self.is_visible else 'Draft'
 
     def __str__(self):
         return self.title
@@ -113,8 +112,9 @@ class Post(models.Model):
             self.slug = slugify(self.title)
 
         word_count = len(self.content.split())
-        average_words_per_minute = 225
-        self.estimated_time = (word_count / average_words_per_minute) + 1
+        average_words_per_minute = 230
+        estimated_time = (word_count / average_words_per_minute) + 1
+        self.estimated_time = math.ceil(estimated_time)
 
         super(Post, self).save(*args, **kwargs)
         if self.main_picture:

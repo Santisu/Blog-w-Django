@@ -1,21 +1,21 @@
 {% extends 'base.html' %} {% load static %} {% load blog_filters %}
 {% block content %}
-<div class="row margin-top">
+<div class="row margin-top margin-zero ">
     <div class="col-12 post-header">
         <div class="post-image">
             <img src="{{ post.main_picture.url }}" alt="{{ post.title }}">
         </div>
-        <div class="post-header-content">
+        <div class="post-header-content col-lg-8">
             <div class="post-time d-flex">
-                <div class="post-date">
+                <div class="post-date p-1 rounded-2">
                     {{ post.created_at }}
                 </div>
             </div>
-            <div class="entry-head col-lg-8">
+            <div class="entry-head">
                 <h1 class="entry-title">{{ post.title|safe }}</h1>
                 <h5 class="entry-subtitle">{{ post.title_drop|safe }}</h4>
                     <div class="entry-title-foot">
-                        <div class="entry-time">&#128339; Tiempo de lectura: <b>{{ post.estimated_time }} minutos</b></div>
+                        <span class="entry-time">&#128339; Tiempo de lectura: <b>{{ post.estimated_time }} minutos</b></span>
                         <div class="post-user d-flex my-3">
                             <div class="post-avatar">
                                 <img class="avatar-image" src="{{ post.author.profile.avatar.url }}" alt="Author Avatar">
@@ -32,6 +32,8 @@
     <div class="col-12 post-footer">
         <div class="footer-content">
             <div class="entry-tags d-flex justify-content-center">
+                <div><a href="{% url 'post_edit' post.slug %}" class="btn btn-primary">Editar Post</a>
+                </div>
                 <div class="like-post d-flex my-auto">
                     {% if post|has_liked:request %}
                     <div class="liked-button my-auto mx-2 p-1">❤ {{ post.likes }} </div>
@@ -84,7 +86,7 @@
         </div>
     </div>
 </div>
-<div class="row fut my-4 ">
+<div class="row margin-zero my-4 ">
     {% for related_post in related_posts %}
     <div class="col-lg-3 related-entry">
         <div class="entry-image ">
